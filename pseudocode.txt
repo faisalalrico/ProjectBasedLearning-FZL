@@ -1,0 +1,81 @@
+MENAMPILKAN_SELAMAT_DATANG():
+    CETAK("Selamat Datang Di Toko Buku FZL")
+    CETAK("1. Pilih Jenis Barang")
+    CETAK("2. Cek Keranjang Belanja")
+    CETAK("3. Selesai")
+    PILIH_MENU:
+    INPUT(menu)
+    JIKA menu == "1":
+        MENAMPILKAN_JENIS_BARANG()
+        PILIH_MENU
+    JIKA menu == "2":
+        MENAMPILKAN_KERANJANG_BELANJA()
+        PILIH_MENU
+    JIKA menu == "3":
+        MELAKUKAN_PEMBAYARAN()
+    JIKA menu != "1" DAN menu != "2" DAN menu != "3":
+        CETAK("(!) Tolong masukkan nomor menu yang valid.")
+        PILIH_MENU
+
+MENAMPILKAN_JENIS_BARANG():
+    CETAK("Pilih Jenis Barang:")
+    CETAK("1. Buku")
+    CETAK("2. Pensil")
+    CETAK("0. Kembali")
+
+MEMILIH_BARANG(nama_file):
+    UNTUK SETIAP BARIS DALAM nama_file:
+        CETAK(INDEKS, ". ", JUDUL, ", Harga: Rp.", HARGA, ", Stok: ", STOK)
+
+    CETAK("0. Kembali")
+
+    INPUT nomor_barang
+    JIKA nomor_barang == 0:
+        KEMBALI
+
+    UNTUK SETIAP BARIS DALAM nama_file:
+        JIKA nomor_barang == INDEKS:
+            JUDUL, HARGA, STOK = AMBIL_BARANG(nama_file, nomor_barang)
+
+    CETAK("Anda akan membeli ", JUDUL, " dengan harga Rp.", HARGA)
+
+    INPUT("Berapa banyak?")
+    JIKA BANYAK_DIMINTA == 0:
+        KEMBALI KE MEMILIH_BARANG(nama_file)
+    JIKA BANYAK_DIMINTA > STOK:
+        CETAK("(!) Banyak yang diminta tidak bisa lebih dari stok yang tersedia")
+        KEMBALI KE MEMILIH_BARANG(nama_file)
+
+    HARGA_TOTAL = HARGA * BANYAK_DIMINTA
+
+    CETAK("Anda akan membeli ", JUDUL, " sebanyak ", BANYAK_DIMINTA, " dengan total harga Rp.", HARGA_TOTAL)
+
+    INPUT("Yakin untuk membeli? (Y/N)")
+    JIKA INPUT == "Y":
+        SIMPAN_TRANSAKSI(JUDUL, HARGA, BANYAK_DIMINTA, HARGA_TOTAL)
+        CETAK("Berhasil ditambahkan ke dalam Keranjang Belanja")
+    ELSE:
+        KEMBALI KE MEMILIH_BARANG(nama_file)
+
+MENAMPILKAN_KERANJANG_BELANJA():
+    UNTUK SETIAP BARANG DALAM KERANJANG:
+        CETAK("Nama: ", JUDUL, " x", BANYAK_DIMINTA, ", Harga: Rp.", HARGA_TOTAL)
+
+    TOTAL_HARGA = HITUNG_TOTAL_HARGA(KERANJANG)
+
+    CETAK("Total harga yang perlu dibayarkan: Rp.", TOTAL_HARGA)
+
+    CETAK("1. Hapus Item")
+    CETAK("2. Hapus Semua")
+    CETAK("3. Lakukan Pembayaran")
+    CETAK("0. Kembali")
+
+MELAKUKAN_PEMBAYARAN():
+    CETAK("Lanjutkan Ke Pembayaran? (Y/N)")
+    INPUT(CONFIRMATION)
+    JIKA CONFIRMATION == "Y":
+        BUAT_NOTA_PEMBELIAN()
+        BERSIHKAN_KERANJANG()
+        CETAK("Terima kasih atas pembelian Anda. Sampai jumpa lagi!")
+
+MEMANGGIL MENAMPILKAN_SELAMAT_DATANG()

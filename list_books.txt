@@ -1,0 +1,7 @@
+Buku:Harry Potter:75000:15
+Buku:Buku Tulis Mini Sindo:1500:87
+Buku:Mein Kampf:120000:0
+Buku:Buku Gambar A4:2000:20
+Buku:Buku Tulis Kampus Sindo:4000:120
+Buku:Lord of the Rings:99500:5
+Buku:Tokyo Revenger Vol 1:46000:10

@@ -1,0 +1,2 @@
+Pensil:Pensil 2B:5000:50
+Pensil:Pensil 4B:7000:30
